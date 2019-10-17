@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <vector>
 // change the value below to 1 to run tests against your StringList class.
 // change the value below to 0 to run tests against the built in std::list.
 
@@ -17,6 +17,14 @@ void Assert(bool cond, std::string message)
 		std::cout << "Pass: " << message << std::endl;
 	else
 		std::cerr << "FAIL: " << message << std::endl;
+}
+
+void displaystring (const StringList string){
+
+	for (auto n : string)
+
+	std::cout << n << std::endl;
+
 }
 
 int main()
@@ -45,6 +53,47 @@ int main()
 	Assert(a.front() == "A", "front method");
 	a.pop_back();
 	Assert(a.back() == "A", "back method");
+
+	std::cout << "___Our 15 testing functions___" << std::endl;
+
+	
+	StringList d;
+	StringList e;
+	d.push_back("shoe");
+	e.push_back("shoe");
+	//push_back test
+	Assert (d == e, "Push_back test");
+	
+	//push_front test
+	d.push_front("hat");
+	e.push_front("hat");
+	Assert (d == e, "Push_front test");
+
+	//opertator = 
+	StringList dcopy = d;	
+	Assert (dcopy == d, "Operator = test");	
+
+	//testing reverse
+	StringList c = {"Electric", "Pineapple","Dog", "Fungus","Bat"};
+	StringList b = {"Bat", "Fungus", "Dog", "Pineapple" ,"Electric"};
+	b.reverse();
+	Assert(c == b, "reverse function");
+
+	//clear test
+	c.clear();
+	Assert (c.begin() == c.end(), "clear function");
+
+	//empty test
+	Assert (c.empty(), "empty function");
+	//swap test
+	c.swap(b);
+	Assert (b.begin() == b.end(), "swap function");
+
+	//unique test 
+	StringList unique = {"A", "A", "A", "B", "B", "C", "D", "D"};
+	unique.unique();
+	Assert (unique.size()== 4, "unique function");
+
 	return 0;
 }
 
