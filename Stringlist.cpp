@@ -1,6 +1,7 @@
 #include <iostream>
-#include "StringList.h"
 #include <string>
+#ifndef Included_Stringlist_H
+#define Included_Stringlist_H
 
 class StringList{
 
@@ -101,4 +102,5 @@ void uniq()
 		}
 	}
 }
-
+};
+#endif
