@@ -8,5 +8,5 @@ all: runtests
 runtests: runtests.o Stringlist.o
 
 clean:
-	rm -f runtests *.o
+	rm -f runtests *.o 
 

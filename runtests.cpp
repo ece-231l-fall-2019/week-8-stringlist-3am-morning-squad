@@ -47,8 +47,6 @@ int main()
 	a.pop_front();
 	Assert(a.front() == "C", "pop_front method");
 	Assert(a.back() == "E", "back method");
-	a.pop_back();
-	Assert(a.back() == "B", "pop_back method");
 	a.pop_front();
 	Assert(a.front() == "A", "front method");
 	a.pop_back();

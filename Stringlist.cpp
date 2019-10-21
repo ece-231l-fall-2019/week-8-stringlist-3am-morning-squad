@@ -1,41 +1,28 @@
 #include <iostream>
 #include <string>
-#ifndef Included_Stringlist_H
-#define Included_Stringlist_H
+#include "Stringlist.h"
+StringList::StringList(){
+	_front = 0;
+	_back = 0;	
+};
 
-class StringList{
+//bool operator=(){}
 
-	private: 
-		typedef llist;
-		llist *_front;
-		llist *_back;
-		size_t _size;
-
-	public:
-
-
-bool operator=(){
-
+bool StringList::empty(front() == back()){
+	return true;
+}
+void SringList::size(){
 
 
 }
 
-bool empty(){
-
-}
-
-bool size(){
-
-
-}
-
-bool clear(){
+void StringList::clear(){
 
 	return _llist == 0;
 
 }	
 
-void push_back(string str) {
+void StringList::push_back(string str) {
 	llist *ptr = new llist;
 	ptr -> str = str;
 	ptr -> next = 0;
@@ -47,7 +34,8 @@ void push_back(string str) {
 	back = ptr;
 	size++;	
 }
-void push_front(string str){
+
+void StringList::push_front(string str){
 	llist *ptr = new llist;
 	ptr -> str = str;
 	ptr -> prev = 0;
@@ -59,9 +47,10 @@ void push_front(string str){
 	front = ptr;
 	size++;
 }
-void pop_front()
+
+void StringList::pop_front()
 {
-	llist ptr = saveptr = front;
+	llist * saveptr = front;
 	front = front ->next;
 		if (front)
 			front ->prev = front -> prev -> prev;
@@ -70,7 +59,8 @@ void pop_front()
 	delete saveptr;
 	size--;
 }
-void pop_back()
+
+void StringList::pop_back()
 {
 	llist ptr = saveptr = back;
 	back = back -> prev;
@@ -81,11 +71,8 @@ void pop_back()
 	delete saveptr;
 	size--;
 }		
-bool empty() 
-{
 
-}
-void uniq()
+void StringList::unique()
 {
 	for(llist *ptr = front; ptr != 0; ptr = ptr ->next)
 	{
@@ -102,5 +89,3 @@ void uniq()
 		}
 	}
 }
-};
-#endif
