@@ -2,42 +2,45 @@
 #include <string>
 #ifndef Included_Stringlist_H
 #define Included_Stringlist_H
-typedef std::string  string;
-
-class StringList{
-
-        private:
-                struct llist{
-			int data;
-                        int *_next;
-                        int *_prev;
-                };
-		llist *_front;
-		llist *_back;
-                size_t _size;
-
-        public:
-	
-	StringList();
-
-	~StringList();	
-
-       // bool operator=();
-
-        bool empty();
-
-        void size();
-
-        void clear(); 
-
-        void push_back(string str);
-
-        void push_front(string str);
-        
-        void pop_front();
-
-        void pop_back();              
-
-        void uniq();
+#include <iostream>
+#include <string>
+class StringList
+{
+private:
+size_t _size;
+typedef struct llist {
+std::string str;
+struct llist *next;
+struct llist *prev;
+} llist;
+llist *_data;
+llist *_dataL;
+public:
+// default constructor
+StringList();
+// copy constructor
+StringList(const StringList& other);
+// destructor
+~StringList();
+// copy operator
+StringList& operator= (std::string str);
+std::string& front();
+void push_front(std::string str);
+void pop_front();
+bool empty();
+void clear();
+std::string& back();
+void pop_back ();
+void unique();
+//missing
+size_t size() const;
+void push_back(std::string str);
+void reverse();
+//---------------return function--------------------------------
+StringList::llist *getdata()const;
+StringList::llist *getdatal()const;
+//------------------printer------------------------------------
+// void printp();
 };
+
 #endif

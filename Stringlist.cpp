@@ -1,91 +1,129 @@
 #include <iostream>
 #include <string>
-#include "Stringlist.h"
-StringList::StringList(){
-	_front = 0;
-	_back = 0;	
-};
-
-//bool operator=(){}
-
-bool StringList::empty(front() == back()){
-	return true;
+#include "StringList.h"
+StringList::StringList()
+{
+_data = 0;
+_dataL = 0;
+_size = 0;
 }
-void SringList::size(){
-
-
+StringList::StringList(const StringList& other)
+{
+*this = other;
 }
-
-void StringList::clear(){
-
-	return _llist == 0;
-
-}	
-
-void StringList::push_back(string str) {
-	llist *ptr = new llist;
-	ptr -> str = str;
-	ptr -> next = 0;
-	ptr ->prev = back;
-		if (back != 0)
-			back->next = ptr;
-		else
-			front = ptr;
-	back = ptr;
-	size++;	
+StringList::~StringList()
+{
+while(!empty())
+pop_front();
 }
-
-void StringList::push_front(string str){
-	llist *ptr = new llist;
-	ptr -> str = str;
-	ptr -> prev = 0;
-	ptr -> next = front;
-		if (front != 0)
-			front ->back = ptr;
-		else
-			back = ptr;
-	front = ptr;
-	size++;
+std::string& StringList::front()
+{
+return _data->str;
 }
-
+void StringList::clear()
+{
+while( !empty())
+      pop_front();
+}
+std::string& StringList::back()
+{
+return _dataL->str;
+}
+void StringList::push_front(std::string str)
+{
+llist *newItem = new llist;
+newItem->str = str;
+newItem->next = _data;
+newItem->prev = NULL;
+if (_data != NULL)
+_data->prev = newItem;
+if( _dataL == NULL)
+_dataL = newItem;
+_data = newItem;
+_size++;
+}
 void StringList::pop_front()
 {
-	llist * saveptr = front;
-	front = front ->next;
-		if (front)
-			front ->prev = front -> prev -> prev;
-		else
-			back = 0;
-	delete saveptr;
-	size--;
+if (!empty())
+{
+llist *ptr = _data;
+_data = _data->next;
+if (_data!= NULL)
+_data->prev = _data->prev->prev;
+else
+_dataL = NULL;
+delete ptr;
+_size--;
 }
-
+}
 void StringList::pop_back()
 {
-	llist ptr = saveptr = back;
-	back = back -> prev;
-		if (back)
-			back -> next = back ->next -> next;
-		else
-			front = 0;
-	delete saveptr;
-	size--;
-}		
-
+if (!empty())
+{
+llist *ptr = _dataL;
+_dataL = _dataL->prev;
+if(_dataL != NULL)
+_dataL->next = _dataL ->next->next;
+else
+_data = NULL;
+delete ptr;
+_size--;
+}
+}
 void StringList::unique()
 {
-	for(llist *ptr = front; ptr != 0; ptr = ptr ->next)
-	{
-		while(ptr -> next != 0 && ptr -> str = ptr -> next -> next)
-		{
-			llist ptr = saveptr = ptr -> next;
-			ptr -> next = ptr -> next -> next;
-			if(saveptr -> next != 0;)
-				saveptr -> next -> prev = ptr;
-			else
-				back = ptr;
-		delete saveptr;
-		size--;
-		}
-	}
+for (llist *ptr = _data; ptr != 0; ptr = ptr->next)
+{
+while (ptr -> next != 0 && ptr->str == ptr->next->str)
+{
+llist *savePtr = ptr->next;
+ptr->next = savePtr->next;
+if(savePtr->next != 0)
+savePtr->next->prev = ptr;
+else
+_dataL = ptr;
+delete savePtr;
+_size--;
+}
+}
+}
+StringList& StringList::operator= (std::string str)
+{
+llist *ptr = new llist;
+for (ptr = _data; ptr!= 0; ptr = ptr -> next)
+push_front(ptr -> str);
+return *this;
+}
+size_t StringList::size() const
+{
+return _size;
+}
+void StringList::push_back(std::string str)
+{
+llist *newItem = new llist;
+newItem->str = str;
+newItem->next = 0;
+newItem->prev = _dataL;
+if (_dataL != 0)
+_dataL->next = newItem;
+if (_data == 0)
+_data = newItem;
+_dataL = newItem;
+_size++;
+}
+bool StringList::empty()
+{
+if (_data == 0)
+return true;
+else 
+return false;
+}
+//----------------------return function-----------------------------
+StringList::llist *StringList::getdata() const
+{
+return _data;
+}
+StringList::llist *StringList::getdatal() const
+{
+return _dataL;
 }
